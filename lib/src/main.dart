@@ -24,12 +24,13 @@ class KeycloakLogin {
       String? uri = Uri.base.toString().replaceAll('#', '?');
       String? token = Uri.parse(uri).queryParameters['access_token'];
       if (token == null) {
-        authenticate(host, realm, clientId, scopes);
+        await authenticate(host, realm, clientId, scopes);
       } else {
         onSuccess(token);
       }
     } else {
       await authenticate(host, realm, clientId, scopes);
+      onSuccess('ok');
     }
   }
 }
